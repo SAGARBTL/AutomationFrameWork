@@ -1,0 +1,34 @@
+package StepDefinition;
+
+import java.io.File;
+import java.time.Duration;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+
+public class HooksClass {
+	WebDriver driver;
+	String configFilePath ="src/main/resources/Config/config.properties";
+
+	@Before
+	public void setup() {
+		Properties prop=new Properties();
+		File ConfigFilePath=new File(configFilePath);
+		
+		System.setProperty("webdriver.chrome.driver", "src/main/resources/Drivers/chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+	}
+
+	@After
+	public void Ending() throws Exception {
+		Thread.sleep(3000);
+		driver.quit();
+	}
+
+}
